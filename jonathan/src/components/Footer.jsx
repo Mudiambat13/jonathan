@@ -3,8 +3,8 @@ import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
   const socialLinks = [
-    { name: 'GitHub', url: 'https://github.com/Mudiamabat13', icon: <FaGithub /> },
-    { name: 'LinkedIn', url: 'https://linkedin.com/in/votre-profil', icon: <FaLinkedin /> },
+    { name: 'GitHub', url: 'https://github.com/Mudiambat13', icon: <FaGithub /> },
+    { name: 'LinkedIn', url: 'https://linkedin.com/in/jonathan-mudiambat-m-609899130/', icon: <FaLinkedin /> },
     { name: 'Twitter', url: 'https://twitter.com/votre-compte', icon: <FaTwitter /> }
   ];
 

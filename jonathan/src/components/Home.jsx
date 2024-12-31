@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import profileImage from '/assets/images/profile.jpg';
 
 const Home = () => {
   return (
@@ -18,9 +19,13 @@ const Home = () => {
             className="mb-8"
           >
             <img
-              src="/votre-photo.jpg"
-              alt="Votre photo"
+              src={profileImage}
+              alt="Jonathan"
               className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-sky-400"
+              onError={(e) => {
+                console.error('Erreur de chargement de l\'image:', e);
+                e.target.src = 'https://via.placeholder.com/128';
+              }}
             />
           </motion.div>
 
@@ -37,10 +42,12 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-sky-100 mb-8 max-w-2xl mx-auto"
+            className="text-xl text-sky-100 mb-8 max-w-2xl mx-auto leading-relaxed"
           >
-            Développeur Full Stack passionné par la création d'expériences web 
-            innovantes et performantes.
+            Développeur Full Stack créatif spécialisé en React et Django. 
+            Je transforme des idées innovantes en applications web performantes 
+            et intuitives. Passionné par l'expérience utilisateur et les 
+            solutions technologiques qui font la différence.
           </motion.p>
 
           <motion.div

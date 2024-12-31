@@ -83,7 +83,7 @@ const About = () => {
         >
           <h3 className="text-xl font-semibold text-white mb-4">Mon Parcours</h3>
           <p className="text-gray-300">
-            Votre parcours professionnel ici...
+          "Passionné par la technologie et le développement, je me suis forgé une solide expérience dans le domaine du contrôle en salle d’opérations et de l’analyse de données avant de me reconvertir avec succès en tant que développeur front-end et full-stack. Avec un Mastère Spécialisé en programmation et plusieurs projets à mon actif, je combine rigueur, créativité et expertise technique pour concevoir des solutions modernes et performantes. Mon parcours illustre ma capacité à relever des défis complexes et à m'adapter rapidement à de nouveaux environnements technologiques."
           </p>
         </motion.div>
 

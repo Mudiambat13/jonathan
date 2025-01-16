@@ -1,39 +1,41 @@
 import { motion } from 'framer-motion';
 
-const ProjectCard = ({ title, description, image, technologies, link }) => {
+const ProjectCard = ({ name, description, html_url, homepage, topics }) => {
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="bg-gray-800 rounded-lg overflow-hidden shadow-lg"
-    >
-      <img 
-        src={image} 
-        alt={title} 
-        className="w-full h-48 object-cover"
-      />
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-        <p className="text-gray-300 mb-4">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {technologies.map((tech, index) => (
-            <span 
-              key={index}
-              className="px-3 py-1 bg-gray-700 rounded-full text-sm text-gray-300"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        <a 
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-        >
-          Voir le projet
-        </a>
+    <div className="rounded-lg overflow-hidden shadow-lg p-6" style={{ backgroundColor: '#EDE0D0' }}>
+      <h3 className="text-xl font-bold mb-2 text-black">{name}</h3>
+      <p className="mb-4 text-black">{description}</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {topics.map((tech, index) => (
+          <span key={index} className="px-3 py-1 rounded-full text-sm text-white" 
+                style={{ backgroundColor: '#424242' }}>
+            {tech}
+          </span>
+        ))}
       </div>
-    </motion.div>
+      <div className="flex space-x-4">
+        <a 
+          href={html_url} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="px-4 py-2 rounded-lg transition-colors text-white"
+          style={{ backgroundColor: '#424242' }}
+        >
+          Voir le code
+        </a>
+        {homepage && (
+          <a 
+            href={homepage} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="px-4 py-2 rounded-lg transition-colors text-white"
+            style={{ backgroundColor: '#424242' }}
+          >
+            Démo live
+          </a>
+        )}
+      </div>
+    </div>
   );
 };
 

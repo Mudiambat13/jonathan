@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Navbar.css */
+.navbar {
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  
+  .navbar.scrolled {
+    background-color: #fff;
+  }
+  
+  .logo {
+    font-size: 2rem;
+    color: teal;
+  }
+  
+  .nav-links a {
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: teal;
+  }

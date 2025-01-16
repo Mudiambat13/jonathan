@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const navbarRef = useRef();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,75 +14,27 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { title: "Accueil", href: "#home" },
-    { title: "Services", href: "#services" },
-    { title: "Projets", href: "#projects" },
-    { title: "Contact", href: "#contact" },
-  ];
+  useEffect(() => {
+    gsap.to(navbarRef.current, { opacity: 1, duration: 1 });
+  }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-sky-950/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <a href="#home" className="text-2xl font-bold text-white">
-            Jonathan<span className="text-sky-400">.dev</span>
-          </a>
-
-          {/* Menu Desktop */}
-          <div className="hidden md:flex space-x-8">
-            {navLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="text-sky-100 hover:text-sky-400 transition-colors"
-              >
-                {link.title}
-              </a>
-            ))}
-          </div>
-
-          {/* Bouton Menu Mobile */}
-          <button
-            className="md:hidden text-white focus:outline-none"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
+    <nav ref={navbarRef} className={`fixed w-full z-10 ${isScrolled ? 'bg-gray-900' : 'bg-gray-900'} shadow-md text-white font-mono`} style={{ backgroundColor: '#EDE0D0' }}>
+      <div className="container mx-auto px-4 flex justify-between items-center py-2">
+        <a href="#home" className="text-2xl text-teal-500">
+          Jonathan Code
+        </a>
+        <div className="text-3xl cursor-pointer md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          ☰
         </div>
-
-        {/* Menu Mobile Overlay */}
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-sky-950/95 backdrop-blur-lg"
-          >
-            <div className="px-4 py-3">
-              {navLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="block py-2 text-sky-100 hover:text-sky-400 transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.title}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        <ul className={`flex gap-4 mt-0 ${isMenuOpen ? 'block' : 'hidden'} md:flex md:items-center md:static absolute bg-gray-900 md:bg-transparent left-0 w-full md:w-auto md:gap-8`}>
+          <li><a href="#home" className="transition-colors duration-300 hover:text-teal-500">Accueil</a></li>
+          <li><a href="#about" className="transition-colors duration-300 hover:text-teal-500">À propos</a></li>
+          <li><a href="#services" className="transition-colors duration-300 hover:text-teal-500">Services</a></li>
+          <li><a href="#contact" className="transition-colors duration-300 hover:text-teal-500">Contact</a></li>
+        </ul>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

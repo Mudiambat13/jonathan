@@ -1,0 +1,43 @@
+:root {
+    --bg-color: #f0ebe6;
+    --text-color: #333;
+    --accent-color: #c06014;
+    --link-hover-color: #f4b860;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  a {
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: var(--link-hover-color);
+  }
+  
+  .button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: var(--link-hover-color);
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 10px;
+  }

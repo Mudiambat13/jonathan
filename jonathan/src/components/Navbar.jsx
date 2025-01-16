@@ -19,9 +19,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav ref={navbarRef} className={`fixed w-full z-10 ${isScrolled ? 'bg-gray-900' : 'bg-gray-900'} shadow-md text-white font-mono`} style={{ backgroundColor: '#EDE0D0' }}>
+    <nav ref={navbarRef} className={`fixed w-full z-10 shadow-md text-white font-mono`} style={{ backgroundColor: '#424242' }}>
       <div className="container mx-auto px-4 flex justify-between items-center py-2">
-        <a href="#home" className="text-2xl text-teal-500">
+        <a href="#home" className="text-2xl text-white font-bold">
           Jonathan Code
         </a>
         <div className="text-3xl cursor-pointer md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>

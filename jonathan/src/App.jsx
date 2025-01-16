@@ -9,17 +9,15 @@ import Services from './components/Services';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-900 via-sky-800 to-sky-950">
+    <div className="min-h-screen" style={{ backgroundColor: '#EDE0D0' }}>
       <Navbar />
       
       <main>
         <Home />
-
-        <Projects />
-
         <About />
-        <Contact />
         <Services />
+        <Projects />
+        <Contact />
       </main>
 
       <Footer />

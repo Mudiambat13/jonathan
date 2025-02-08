@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-  const navbarRef = useRef();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -14,27 +13,95 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    gsap.to(navbarRef.current, { opacity: 1, duration: 1 });
-  }, []);
-
   return (
-    <nav ref={navbarRef} className={`fixed w-full z-10 shadow-md text-white font-mono`} style={{ backgroundColor: '#424242' }}>
-      <div className="container mx-auto px-4 flex justify-between items-center py-2">
-        <a href="#home" className="text-2xl text-white font-bold">
-          Jonathan Code
-        </a>
-        <div className="text-3xl cursor-pointer md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          ☰
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/80 backdrop-blur-md shadow-lg'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          <motion.a
+            href="#home"
+            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Jonathan Code
+          </motion.a>
+
+          {/* Menu Burger pour Mobile */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-gray-600 hover:text-gray-800 focus:outline-none"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
+
+          {/* Navigation Desktop */}
+          <div className="hidden md:flex items-center space-x-8">
+            {['Accueil', 'À propos', 'Services', 'Contact'].map((item) => (
+              <motion.a
+                key={item}
+                href={`#${item.toLowerCase().replace('à ', '')}`}
+                className="text-gray-600 hover:text-gray-800 font-medium transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {item}
+              </motion.a>
+            ))}
+          </div>
         </div>
-        <ul className={`flex gap-4 mt-0 ${isMenuOpen ? 'block' : 'hidden'} md:flex md:items-center md:static absolute bg-gray-900 md:bg-transparent left-0 w-full md:w-auto md:gap-8`}>
-          <li><a href="#home" className="transition-colors duration-300 hover:text-teal-500">Accueil</a></li>
-          <li><a href="#about" className="transition-colors duration-300 hover:text-teal-500">À propos</a></li>
-          <li><a href="#services" className="transition-colors duration-300 hover:text-teal-500">Services</a></li>
-          <li><a href="#contact" className="transition-colors duration-300 hover:text-teal-500">Contact</a></li>
-        </ul>
+
+        {/* Menu Mobile */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden"
+            >
+              <div className="py-4 space-y-4">
+                {['Accueil', 'À propos', 'Services', 'Contact'].map((item) => (
+                  <motion.a
+                    key={item}
+                    href={`#${item.toLowerCase().replace('à ', '')}`}
+                    className="block text-gray-600 hover:text-gray-800 font-medium transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

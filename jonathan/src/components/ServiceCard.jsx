@@ -1,29 +1,40 @@
 import { motion } from 'framer-motion';
 
-const ServiceCard = ({ title, description, icon }) => {
+const ServiceCard = ({ title, mainIcon, description, technologies }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ 
-        scale: 1.05,
-        transition: { duration: 0.2 }
-      }}
-      className="bg-[#EDE0D0] shadow-md rounded-lg p-6 border border-gray-200"
+      whileHover={{ y: -5 }}
+      className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-gray-100"
     >
-      <div className="flex flex-col items-center text-center">
-        <motion.div 
-          className="text-4xl mb-4"
-          whileHover={{ 
-            rotate: 360,
-            transition: { duration: 0.6 }
-          }}
-        >
-          {icon}
-        </motion.div>
-        <h3 className="text-xl font-bold mb-3 text-black">{title}</h3>
-        <p className="text-black">{description}</p>
+      <div className="flex items-center mb-4">
+        <div className="p-3 rounded-lg bg-gradient-to-r from-purple-600/10 to-blue-500/10">
+          {mainIcon}
+        </div>
+      </div>
+      
+      <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+        {title}
+      </h3>
+      
+      <p className="text-gray-600 mb-4">
+        {description}
+      </p>
+
+      <div className="flex gap-4 mt-4">
+        {technologies.map((tech, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ scale: 1.1 }}
+            className="tooltip-container"
+          >
+            <div className="text-xl" style={{ color: tech.color }}>
+              {tech.icon}
+            </div>
+            <span className="tooltip absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 transition-opacity duration-200">
+              {tech.name}
+            </span>
+          </motion.div>
+        ))}
       </div>
     </motion.div>
   );
